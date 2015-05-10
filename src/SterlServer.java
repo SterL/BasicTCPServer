@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class SterlServer implements DataEvent{
     ArrayList<User> users;
     ServerEvent serverEvent;
+    Thread serverThread
     int port;
     int numThreads;
     TCPServer server;
@@ -23,7 +24,7 @@ public class SterlServer implements DataEvent{
      *
      */
     public void start(){
-        Thread serverThread = new Thread(server);
+        serverThread = new Thread(server);
         serverThread.start();
     }
 
@@ -31,7 +32,8 @@ public class SterlServer implements DataEvent{
      *
      */
     public void stop() {
-
+        server.stop();
+        
     }
 
     /**
@@ -39,6 +41,7 @@ public class SterlServer implements DataEvent{
      */
     @Override
     public void receiveData (User u, String s) {
+        //Log here
         serverEvent.receive(u, s);
     }
 

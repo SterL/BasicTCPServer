@@ -7,6 +7,8 @@ public class TCPServer implements Runnable{
     DataEvent dataEvent;
     public static int PORT;
     public static int NUMTHREADS;
+    boolean running = true;
+
     ArrayList<User> users;
     public TCPServer(DataEvent de, int port, int numThreads, ArrayList<User> u){
         this.dataEvent = de;
@@ -19,7 +21,7 @@ public class TCPServer implements Runnable{
         System.out.println("Server Successfully Started");
         ExecutorService pool = Executors.newFixedThreadPool(NUMTHREADS);
         try (ServerSocket server = new ServerSocket(PORT)){
-            while(true){
+            while(running){
                 try{
                     Socket connection = server.accept();
                     System.out.println("Connection Received");
@@ -32,5 +34,9 @@ public class TCPServer implements Runnable{
         }catch(IOException ex){
             System.err.println("Couldn't start server");
         }
+    }
+
+    public void stop(){
+        running = false;
     }
 }
