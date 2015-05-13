@@ -1,5 +1,3 @@
-package com.company;
-
 /**
  * Created by drew on 5/10/15.
  */
