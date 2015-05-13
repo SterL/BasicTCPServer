@@ -14,9 +14,10 @@ Simply implement the ServerEvent and add the unimplemented method:
 
     @Override
     public void receive(Connection u, String s) {
-        
+        //The main logic for your server goes here
     }
     
+
 Create and start the Server using the following block of code:
 
   ```
