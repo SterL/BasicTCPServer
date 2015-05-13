@@ -1,3 +1,5 @@
+package com.company;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -6,24 +8,24 @@ import java.util.concurrent.Callable;
 public class ServerTask implements Callable<Void> {
 
     BufferedReader input;
-    User user;
+    Connection connection;
     Boolean running = true;
     DataEvent dataEvent;
 
-    public ServerTask(DataEvent de, User u){
-        this.user = u;
+    public ServerTask(DataEvent de, Connection c){
+        this.connection = c;
         this.dataEvent = de;
     }
 
     @Override
     public Void call() throws Exception {
         try{
-            input = new BufferedReader(new InputStreamReader(user.connection.getInputStream()));
+            input = new BufferedReader(new InputStreamReader(connection.connection.getInputStream()));
         while(running){
             String msg = input.readLine();
 
             if(msg != null){
-                dataEvent.receiveData(user, msg);
+                dataEvent.receiveData(connection, msg);
             }
         }
         } catch (IOException ex){

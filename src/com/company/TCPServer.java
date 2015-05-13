@@ -1,3 +1,5 @@
+package com.company;
+
 import java.io.*;
 import java.net.*;
 import java.util.*;
@@ -9,12 +11,12 @@ public class TCPServer implements Runnable{
     public static int NUMTHREADS;
     boolean running = true;
 
-    ArrayList<User> users;
-    public TCPServer(DataEvent de, int port, int numThreads, ArrayList<User> u){
+    ArrayList<Connection> connections;
+    public TCPServer(DataEvent de, int port, int numThreads, ArrayList<Connection> u){
         this.dataEvent = de;
         this.PORT = port;
         this.NUMTHREADS = numThreads;
-        users = u;
+        connections = u;
     }
 
     public void run(){
@@ -25,14 +27,14 @@ public class TCPServer implements Runnable{
                 try{
                     Socket connection = server.accept();
                     System.out.println("Connection Received");
-                    User newUser = new User(connection);
-                    users.add(newUser);
-                    Callable<Void> task = new ServerTask(dataEvent, newUser);
+                    Connection newConnection = new Connection(connection);
+                    connections.add(newConnection);
+                    Callable<Void> task = new ServerTask(dataEvent, newConnection);
                     pool.submit(task);
                 } catch (IOException ex) {}
             }
         }catch(IOException ex){
-            System.err.println("Couldn't start server");
+            System.err.println("Couldn't start server, btw Ivan Says hi");
         }
     }
 
