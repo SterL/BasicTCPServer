@@ -24,6 +24,20 @@ Create and start the Server using the following block of code:
   BasicTCPServer myServer = new BasicTCPServer(this, 3000, 50);  //Context, PORT, Number of threads
   myServer.start();
   ```
+  
+VOILA!  Your own BasicTCPServer
+
+As far as a client goes, they aren't incredibly hard to implement and there are many possibilities out there.  I suggest building your own from scratch, but if you want one that works right out the gate go here:
+
+(http://www.cise.ufl.edu/~amyles/tutorials/tcpchat/TCPChat.java)
+
+or download the code
+
+(http://www.cise.ufl.edu/~amyles/tutorials/tcpchat/TCPChat.java)
+
+Created by Ashish Myles
+  
+  
 
 
 
